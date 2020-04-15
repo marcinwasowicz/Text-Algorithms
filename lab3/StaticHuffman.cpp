@@ -40,14 +40,6 @@ bool isLeaf(node* n){
     return n->left == NULL && n->right == NULL;
 }
 
-unordered_map<char, ll> getWeights(string& text){
-    unordered_map<char, ll> result;
-    for(char c : text){
-        result[c]++;
-    }
-    return result;
-}
-
 unordered_map<char, ll> getWeights(FILE* file){
     unordered_map<char, ll> result;
     for(char c = fgetc(file); c!=EOF; c = fgetc(file)){
@@ -93,14 +85,6 @@ void makeCodingDictionary(node* huffmanTree, unordered_map<char, vector<bool>>& 
     workspace.push_back(true);
     makeCodingDictionary(huffmanTree->right, dict, workspace);
     workspace.pop_back();
-}
-
-node* getHuffmanCoding(unordered_map<char, vector<bool>>& dict,string& text){
-    unordered_map<char, ll> weights = getWeights(text);
-    node* root = makeTree(weights);
-    vector<bool> workspace;
-    makeCodingDictionary(root, dict, workspace);
-    return root;
 }
 
 node* getHuffmanCoding(unordered_map<char, vector<bool>>& dict,FILE* file){
