@@ -99,14 +99,15 @@ vector<int> DBFDictionary::findPattern(string &text, string &pattern) {
     }
 
     vector<int> factorPriorities = this->dbf[validFactorLength];
+    int referencePriority = factorPriorities[indexesToSearch[factorPosition]];
 
-    for(int i = factorPosition; i>= 0 && factorPriorities[indexesToSearch[i]] == factorPriorities[indexesToSearch[factorPosition]]; i--){
+    for(int i = factorPosition; i>= 0 && factorPriorities[indexesToSearch[i]] == referencePriority; i--){
         if(indexesToSearch[i] + pattern.length() < text.length() && pattern == text.substr(indexesToSearch[i], pattern.length())){
             result.insert(result.begin(), indexesToSearch[i]);
         }
     }
 
-    for(int i = factorPosition + 1; i<indexesToSearch.size() && factorPriorities[indexesToSearch[i]] == factorPriorities[indexesToSearch[factorPosition]]; i++){
+    for(int i = factorPosition + 1; i<indexesToSearch.size() && factorPriorities[indexesToSearch[i]] == referencePriority; i++){
         if(indexesToSearch[i] + pattern.length() < text.length() && pattern == text.substr(indexesToSearch[i], pattern.length())){
             result.push_back(indexesToSearch[i]);
         }
