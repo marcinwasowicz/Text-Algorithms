@@ -95,30 +95,26 @@ Automaton::~Automaton() {
 bool Automaton::match(string &text) {
     queue<pair<node*, int>> Q;
     Q.push(make_pair(this->startState, 0));
-    int queueSize = Q.size();
     while(!Q.empty()){
-        for(int i = 0; i<queueSize; i++){
-            node* v = Q.front().first;
-            int letter = Q.front().second;
-            Q.pop();
-            if(v == this->finalState && letter == text.length()){
-                return true;
-            }
-            for(auto epsilonTransition : v->epsilon){
-                Q.push(make_pair(epsilonTransition, letter));
-            }
-            if(letter < text.length() && v->transitions.find(text[letter])!=v->transitions.end()){
-                for(auto letterTransition : v->transitions[text[letter]]){
-                    Q.push(make_pair(letterTransition, letter+1));
-                }
-            }
-            if(letter < text.length() && v->transitions.find('.')!=v->transitions.end()){
-                for(auto dotTransition : v->transitions['.']){
-                    Q.push(make_pair(dotTransition, letter+1));
-                }
+        node* v = Q.front().first;
+        int letter = Q.front().second;
+        Q.pop();
+        if(v == this->finalState && letter == text.length()){
+            return true;
+        }
+        for(auto epsilonTransition : v->epsilon){
+            Q.push(make_pair(epsilonTransition, letter));
+        }
+        if(letter < text.length() && v->transitions.find(text[letter])!=v->transitions.end()){
+            for(auto letterTransition : v->transitions[text[letter]]){
+                Q.push(make_pair(letterTransition, letter+1));
             }
         }
-        queueSize = Q.size();
+        if(letter < text.length() && v->transitions.find('.')!=v->transitions.end()){
+            for(auto dotTransition : v->transitions['.']){
+                Q.push(make_pair(dotTransition, letter+1));
+            }
+        }
     }
     return false;
 }
