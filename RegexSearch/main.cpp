@@ -4,6 +4,7 @@
 int main() {
 
     vector<string> regexPatterns = {
+            string(), // empty string case ("" is NOT valid empty string initialization in c++)
             "a",
             "aaa*",
             "a+b?",
@@ -13,6 +14,8 @@ int main() {
     };
 
     vector<vector<pair<string, bool>>> tests = {
+            {make_pair(string(), true), make_pair("whatever", false)},
+
             {make_pair("a", true), make_pair("aaaaa", false)},
 
             {make_pair("aa", true), make_pair("aaaaaa", true), make_pair("aaab", false), make_pair("a", false)},
