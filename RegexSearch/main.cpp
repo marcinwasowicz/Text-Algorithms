@@ -4,7 +4,7 @@
 int main() {
 
     vector<string> regexPatterns = {
-            "", // empty string case ("" is NOT valid empty string initialization in c++)
+            "",
             "a",
             "aaa*",
             "a+b?",
