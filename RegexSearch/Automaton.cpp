@@ -4,12 +4,12 @@ Automaton::Automaton(string &regex) {
     this->startState = new node;
     this->finalState = this->startState;
     node* workState = this->startState;
-    unordered_set<char> specialChars = {']', '[', '*', '+','?', '.'};
-
+    unordered_set<char> specialChars = {']', '[', '*', '+','?'};
     for(int position = 0; position<regex.length();position++){
         char magicLetter = regex[position-1];
         if(specialChars.find(regex[position]) == specialChars.end()){
-            if(position+1 >= regex.length() || (regex[position+1]!='*' && regex[position+1]!='+' && regex[position+1] != '?')) {
+            char nextChar = regex[position+1];
+            if(position+1 >= regex.length() || (nextChar !='*' && nextChar !='+' && nextChar != '?')) {
                 node *temp = new node;
                 workState->transitions[regex[position]].push_back(temp);
                 workState = temp;
@@ -47,19 +47,13 @@ Automaton::Automaton(string &regex) {
             workState = temp3;
             this->finalState = workState;
         }
-        else if(regex[position] == '['){
+        else {
             node* temp = new node;
             for(position++; regex[position] != ']'; position++){
                 workState->transitions[regex[position]].push_back(temp);
             }
             workState = temp;
             this->finalState = workState;
-        }
-        else {
-            node* temp = new node;
-            workState->transitions['.'].push_back(temp);
-            workState = temp;
-            this->finalState = temp;
         }
     }
 }

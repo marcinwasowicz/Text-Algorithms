@@ -6,17 +6,29 @@ int main() {
     vector<string> regexPatterns = {
             "",
             "a",
+            ".*",
+            ".+",
+            ".?",
+            "asd*[bc].+",
             "aaa*",
             "a+b?",
             "aa+[bcd]b?",
             "bab+a*.a[nhu]a*",
-            "cccg+a?bb*v[op]"
+            "cccg+a?bb*v[op]",
     };
 
     vector<vector<pair<string, bool>>> tests = {
             {make_pair("", true), make_pair("whatever", false)},
 
             {make_pair("a", true), make_pair("aaaaa", false)},
+
+            {make_pair("", true), make_pair("whatever", true)},
+
+            {make_pair("", false), make_pair("whatever", true)},
+
+            {make_pair("", true), make_pair("l", true), make_pair("whatever", false)},
+
+            {make_pair("asddddddbqwerty", true), make_pair("asddddddc", false), make_pair("asdddddqwerty", false)},
 
             {make_pair("aa", true), make_pair("aaaaaa", true), make_pair("aaab", false), make_pair("a", false)},
 
