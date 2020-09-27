@@ -8,6 +8,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<ctime>
 
 #define ll long long int
 using namespace std;
@@ -200,7 +201,13 @@ void decompressFile(char* fileName){
 }
 
 int main(int argc, char* argv[]){
+    clock_t start = clock();
     compressFile(argv[1]);
+    clock_t end = clock();
+    cout<<"compression took "<< (end-start)*1000/CLOCKS_PER_SEC<<" miliseconds\n";
     char compressed[] = "compressed";
+    start = clock();
     decompressFile(compressed);
+    end = clock();
+    cout<<"decompression took "<<(end - start)*1000/CLOCKS_PER_SEC<<"miliseconds\n";
 }

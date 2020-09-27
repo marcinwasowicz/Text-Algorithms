@@ -1,0 +1,46 @@
+Poniżej dane są czasy kompresji i dekompresji oraz współczynniki kompresji dla plików, o poszczególnych rozmiarach.
+Pliki zostały wygenerowane, jako losowe ciągi znaków ASCII za pomocą skryptu fileMaker.py.
+Współczynniki kompresji obliczono na podstawie zadanego rozmiaru pliku i długości obiektu klasy bitarray.
+Plik 1kB:
+Algorytm statyczny:
+czas kompresji: 0.0016 sekundy
+czas dekompresji: 0.002 sekundy
+współczynniki kompresji: 29.38%
+Algorytm dynamiczny:
+czas kompresji: 0.05 sekundy
+czas dekompresji: 0.05 sekundy
+współczynnik kompresji: 19.5%
+Plik 10kB:
+Algorytm statyczny:
+czas kompresji: 0.012 sekundy
+czas dekompresji: 0.038 sekundy
+współczynniki kompresji: 28.3%
+Algorytm dynamiczny:
+czas kompresji: 0.322 sekundy
+czas dekompresji: 0.302 sekundy
+współczynnik kompresji: 26.7%
+Plik 100kB:
+Algorytm statyczny:
+czas kompresji: 0.09 sekundy
+czas dekompresji: 0.355 sekundy
+współczynniki kompresji: 27.99%
+Algorytm dynamiczny:
+czas kompresji: 7.072 sekund
+czas dekompresji: 6.4 sekund
+współczynnik kompresji: 27.56%
+Plik 1MB:
+Algorytm statyczny:
+czas kompresji: 0.44 sekundy
+czas dekompresji: 2.09 sekundy
+współczynniki kompresji: 27.92%
+Algorytm dynamiczny:
+czas kompresji: 65 sekundy
+czas dekompresji: 63 sekundy
+współczynnik kompresji: 27.63%
+Analizując wyniki można stwierdzić, że dla dużych plików stopień kompresji jest podobny, ponieważ wraz z przychodzącymi znakami
+drzewo z algorytmu adaptacyjnego zbiega się z idealnym drzewem algorytmu statycznego. Ewentualną różnicę widać tylko
+dla najmniejszego pliku z badanego zestawu. Można również zauważyć, że zarówno czasy kompresji, jak i dekompresji
+są większe dla algorytmu dynamicznego, co jest intuicyjne biorąc po uwagę fakt, że wykonuje on dużą liczbę operacji na jeden znakami
+mimo, że plik jest czytany raz. Podsumowując algorytm adaptacyjny jest dobry, jeśli dane przychodzą online, i dysponujemy dobrym
+zasobem sprzętowym lub zoptymalizowaną implementacją. Jeśli natomiast nie ma wymogu kompresji pliku na bieżąco z tworzeniem
+to algorytm statyczny jest najlepszym wyborem.
